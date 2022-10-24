@@ -1,0 +1,30 @@
+@import "base/normalize";
+
+@import "abstract/constants";
+@import "abstract/mixins";
+@import "abstract/placeholders";
+
+@import "base/base";
+
+.container {
+  max-width: 1420px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.button__disabled {
+  opacity: .2;
+}
+
+
+
