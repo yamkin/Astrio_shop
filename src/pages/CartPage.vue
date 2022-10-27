@@ -16,16 +16,19 @@
                   @increment="increment(index)"
                   @decrement="decrement(index)"
               />
-
             </ul>
             <div
                 v-else
                 class="product-cart__empty"
             >
               <h2 class="product-cart__empty-title">Your cart is empty</h2>
-              <div class="product-cart__empty-img">
-                <img src="../assets/images/shopping-cart.svg" alt="shopping-cart">
-              </div>
+              <all-icons class="product-cart__empty-img" name="shoppingCartIcon"/>
+<!--              <div class="product-cart__empty-img">-->
+<!--                <img-->
+<!--                    src="../assets/images/shopping-cart.svg"-->
+<!--                    alt="shopping-cart"-->
+<!--                >-->
+<!--              </div>-->
               <p class="product-cart__empty-text">To place an order, go to the catalog page.</p>
               <router-link :to="{name: 'main'}">
                 <button class="button button--big product-cart__item-button">
@@ -37,13 +40,13 @@
           </div>
           <div class="total-price-cart">
             <div class="total-price-cart__top">
-            <h2 class="total-price-cart__title">
-              Total price:
-            </h2>
-            <span class="total-price-cart__count">{{ cartTotalCost }} <span>USD</span></span>
+              <h2 class="total-price-cart__title">
+                Total price:
+              </h2>
+              <span class="total-price-cart__count">{{ cartTotalCost }} <span>USD</span></span>
             </div>
             <div class="total-price-cart__bottom">
-            <button class="button button--big total-price-cart__button">Checkout</button>
+              <button class="button button--big total-price-cart__button">Checkout</button>
             </div>
           </div>
         </div>
@@ -54,11 +57,14 @@
 
 <script>
 import CartItem from "@/components/cart/CartItem";
+
 import {mapGetters, mapActions} from "vuex";
+import AllIcons from "@/components/UI/AllIcons";
 
 export default {
   name: "CartPage",
   components: {
+    AllIcons,
     CartItem
   },
   computed: {
@@ -239,14 +245,11 @@ export default {
     .product-cart__empty-title {
       text-align: center;
     }
-    .product-cart__empty-img img {
+
+    .product-cart__empty-img {
       display: flex;
       margin: auto;
       max-width: 200px;
-      img {
-        width: 100%;
-        height: 100%;
-      }
     }
   }
 }

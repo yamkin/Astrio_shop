@@ -30,7 +30,7 @@ export default {
             state.cart.push({...product, quantity: 1})
         }
     },
-    REMOVE_CART: (state, index) => {
+    REMOVE_ITEM_FROM_CART: (state, index) => {
         state.cart.splice(index, 1)
     },
     INCREMENT: (state, index) => {

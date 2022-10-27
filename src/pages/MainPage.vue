@@ -29,8 +29,10 @@
           </div>
         </div>
         <div>
-          <div v-for="product in UPDATE_PRODUCTS" :key="product.id">
-
+          <div
+              v-for="product in PRODUCTS"
+              :key="product.id"
+          >
           </div>
         </div>
 
@@ -42,6 +44,7 @@
 <script>
 import CatalogItem from "@/components/catalog/CatalogItem";
 import FilterCategory from "@/components/UI/FilterCategory";
+
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
@@ -59,17 +62,16 @@ export default {
   computed: {
     ...mapGetters([
       'BRANDS',
-      'UPDATE_PRODUCTS',
+      'PRODUCTS',
     ]),
 
     filteredProducts() {
       if (this.sortedProducts.length) {
         return this.sortedProducts
       } else {
-        return this.UPDATE_PRODUCTS
+        return this.PRODUCTS
       }
     },
-
   },
   methods: {
     ...mapActions([
@@ -83,7 +85,7 @@ export default {
     selectBrand(brand) {
       this.sortedProducts = []
       let vm = this
-      this.UPDATE_PRODUCTS.map((item) => {
+      this.PRODUCTS.map((item) => {
         if (item.brand === brand.id) {
           vm.sortedProducts.push(item)
         }
@@ -110,7 +112,6 @@ export default {
   line-height: 1.2;
   letter-spacing: normal;
   text-align: left;
-  //@include font (44px, 1.2, normal, normal)
 }
 
 .catalog-content {
@@ -213,5 +214,4 @@ export default {
     margin-bottom: 10px;
   }
 }
-
 </style>

@@ -5,7 +5,8 @@
         v-for="brand in brands"
         :key="brand.id"
         @click="selectBrand(brand)"
-        class="catalog-filter__category-item">
+        class="catalog-filter__category-item"
+    >
       {{ brand.title }}
     </a>
   </div>
@@ -31,11 +32,6 @@ export default {
 </script>
 
 <style lang="scss">
-
-.catalog-filter__category-list {
-
-}
-
 .catalog-filter__category-item {
   cursor: pointer;
   transition: .3s;
@@ -44,5 +40,4 @@ export default {
     color: #56bdc5
   }
 }
-
 </style>

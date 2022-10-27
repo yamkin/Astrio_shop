@@ -1,5 +1,4 @@
 export default {
-
     ADD_TO_CART({commit}, product) {
         commit('SET_CART', product)
     },
@@ -10,6 +9,6 @@ export default {
         commit('DECREMENT', index)
     },
     DELETE_FROM_CART({commit}, index) {
-        commit('REMOVE_CART', index)
+        commit('REMOVE_ITEM_FROM_CART', index)
     }
 }

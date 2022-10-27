@@ -2,11 +2,13 @@
   <li class="product-cart__item">
     <div class="product-cart__add">
       <div class="product-cart__wrapper">
+        <div>
         <router-link :to="{}">
           <h2 class="product-cart__title">{{ cart_data_item.title }}</h2>
         </router-link>
-        <div>
+        <p class="product-cart__brand-name">
           {{ cart_data_item.brandName }}
+        </p>
         </div>
         <p class="product-cart__price">
           <b>
@@ -15,7 +17,6 @@
               {{ cart_data_item.regular_price.currency }}
             </span>
           </b>
-
         </p>
       </div>
       <div class="product-cart__image-wrap">
@@ -130,7 +131,7 @@ export default {
   position: relative;
   display: grid;
   grid-template-areas: "image wrapper count total remove";
-  grid-template-columns: 100px minmax(100px, 250px) 1fr max-content max-content;
+  grid-template-columns: 100px minmax(100px, 450px) 1fr max-content max-content;
   grid-column-gap: 20px;
   align-items: center;
   min-height: 180px;
@@ -140,7 +141,8 @@ export default {
 .product-cart__wrapper {
   display: grid;
   grid-area: wrapper;
-
+  grid-template-areas: "title price";
+  grid-template-columns: max-content 1fr;
   .product-cart__title {
     margin: 0 0 5px;
     color: #000;
@@ -150,17 +152,21 @@ export default {
     cursor: pointer;
   }
 
-  .product-cart__subtitle {
-    margin: 0 0 10px;
+  .product-cart__brand-name {
+    margin: 0 0 5px;
   }
+
+  //.product-cart__subtitle {
+  //  margin: 0 0 10px;
+  //}
 
   .product-cart__price {
     display: grid;
     grid-auto-flow: column;
     grid-column-gap: 10px;
     align-items: center;
-    justify-content: start;
-    margin: 0 0 20px;
+    justify-content: end;
+    //margin: 0 0 20px;
     color: #bcbcc6;
     font-size: 18px;
 
@@ -295,6 +301,14 @@ export default {
     align-items: start;
     min-height: 140px;
     padding: 20px;
+  }
+
+  .product-cart__wrapper {
+    display: grid;
+    grid-area: wrapper;
+    grid-template-areas: "title"
+                         "price";
+    grid-template-columns: max-content;
   }
 
   .product-cart__count {
