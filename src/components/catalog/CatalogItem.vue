@@ -1,28 +1,32 @@
 <template>
   <div class="catalog-card">
-    <router-link
-        class="catalog-card__img"
-        to=""
-    >
-      <img
-          :src=" require('../../assets' + product_data.image) "
-          alt="img"
-      >
+    <router-link class="catalog-card__img" to="">
+      <img :src="require('../../assets' + product_data.image)" alt="img" />
     </router-link>
-    <router-link
-        class="catalog-card__title"
-        to=""
-    >
+    <router-link class="catalog-card__title" to="">
       {{ product_data.title }}
     </router-link>
     <div class="catalog-card__brand">
       {{ product_data.brandName }}
     </div>
+    <div v-if="product_data.configurable_options">
+      <colors-attributes
+          v-for="attributes in getAttributeColors"
+          :key="attributes.value_index"
+          :colors_data="attributes"
+      />
+      <size-attributes
+          v-for="attributes in getAttributeSize"
+          :key="attributes.value_index"
+          :size_data="attributes"
+      />
+    </div>
+    <div v-else >
+      <div class="catalog-card__attributes-empty"></div>
+      <div class="catalog-card__attributes-empty"></div>
+    </div>
     <div class="catalog-card__price-row">
-      <router-link
-          to=""
-          class="catalog-card__price"
-      >
+      <router-link to="" class="catalog-card__price">
         <b>
           {{ product_data.regular_price.value }}
           <span>
@@ -30,22 +34,24 @@
           </span>
         </b>
       </router-link>
-      <router-link
-          class="catalog-card__cart"
-          to="">
-        <!--        <img src="../assets/image/card-cart.svg" alt="card-cart-icon">-->
-        <all-icons @click="addToCart" name="cardСartIcon"/>
+      <router-link class="catalog-card__cart" to="">
+        <all-icons @click="addToCart" name="cardСartIcon" />
       </router-link>
     </div>
   </div>
 </template>
 
+
 <script>
-import AllIcons from "@/components/UI/AllIcons";
+import AllIcons from '@/components/UI/AllIcons';
+import ColorsAttributes from "@/components/UI/ColorsAttributes";
+import SizeAttributes from "@/components/UI/SizeAttributes";
 export default {
-  name: "CatalogItem",
+  name: 'CatalogItem',
   components: {
-    AllIcons
+    SizeAttributes,
+    ColorsAttributes,
+    AllIcons,
   },
   props: {
     product_data: {
@@ -54,26 +60,38 @@ export default {
         return {};
       },
     },
-    brand_data: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
-
   },
   data() {
     return {
-      mutationProducts: []
+
+    };
+  },
+  computed: {
+    getAttributeColors() {
+      let attributes_colors = []
+      this.product_data.configurable_options.map((item) => {
+        if(item.label === 'Color') {
+          attributes_colors.push(item.values)
+        }
+      })
+      return attributes_colors
+    },
+    getAttributeSize() {
+      let attributes_size = []
+      this.product_data.configurable_options.map((item) => {
+        if(item.label === 'Size') {
+          attributes_size.push(item.values)
+        }
+      })
+      return attributes_size
     }
   },
   methods: {
     addToCart() {
-      this.$emit('addToCart', this.product_data)
-    }
+      this.$emit('addToCart', this.product_data);
+    },
   },
-
-}
+};
 </script>
 
 <style lang="scss">
@@ -81,7 +99,7 @@ export default {
   display: grid;
   background: #fff;
   padding: 20px;
-  transition: .3s;
+  transition: 0.3s;
 
   &:hover {
     box-shadow: 0 10px 10px 0 rgba(98, 62, 99, 0.1);
@@ -127,7 +145,14 @@ export default {
   }
 
   &__brand {
-    margin-bottom: 15px;
+    //margin-bottom: 5px;
+  }
+
+  &__attributes-empty {
+    height: 30px;
+    width: 100%;
+    margin: 0 auto 4px;
+    max-width: 300px;
   }
 
   &__price-row {
@@ -194,5 +219,4 @@ export default {
     text-align: left;
   }
 }
-
 </style>

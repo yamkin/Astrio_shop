@@ -23,7 +23,6 @@
                 v-for="product in filteredProducts"
                 :key="product.id"
                 :product_data="product"
-                :brand_data="BRANDS"
                 @addToCart="addToCart"
             />
           </div>
